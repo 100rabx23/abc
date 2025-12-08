@@ -226,7 +226,6 @@
           </div>
         </div>
 
-        <!-- Discipline field -->
         <label for="discipline">Discipline *</label>
         <input
           id="discipline"
@@ -286,7 +285,7 @@
   </div>
 
   <script>
-    const PRICE_PER_PERSON = 1; // per person fee
+    const PRICE_PER_PERSON = 100;
 
     const personsSelect = document.getElementById("persons");
     const totalAmountSpan = document.getElementById("totalAmount");
@@ -295,9 +294,9 @@
     const statusEl = document.getElementById("status");
 
     function updateAmount() {
-      const persons = parseInt(personsSelect.value || "0", 10);
+      const persons = Number(personsSelect.value || "0");
       const total = persons * PRICE_PER_PERSON;
-      totalAmountSpan.textContent = total;
+      totalAmountSpan.textContent = Number.isFinite(total) ? total : 0;
     }
 
     personsSelect.addEventListener("change", updateAmount);
@@ -314,19 +313,19 @@
       const passout = document.getElementById("passout").value.trim();
       const branch = document.getElementById("branch").value.trim();
       const discipline = document.getElementById("discipline").value.trim();
-      const persons = parseInt(personsSelect.value, 10);
-      const total = persons * PRICE_PER_PERSON;
 
-      if (!persons || total <= 0) {
+      const persons = Number(personsSelect.value);
+      if (!Number.isFinite(persons) || persons <= 0) {
         statusEl.textContent = "Please select number of persons.";
         statusEl.className = "status error";
         return;
       }
 
+      const total = persons * 1;
+
       statusEl.textContent = "Submitting your registration...";
       statusEl.className = "status";
 
-      // 🔗 Apps Script backend URL
       const BACKEND_URL =
         "https://script.google.com/macros/s/AKfycbwqqz5m0thNuPXHBUMzflJ8iZJiOndNieluTOeBpmudQiFnNyuezkmQDAU2I9HZvZ9qRg/exec";
 
@@ -342,23 +341,20 @@
         event: "UPL Alumni Meet 2026",
       };
 
-      // 🔒 Fire-and-forget POST (no-cors) to avoid CORS errors
       try {
         fetch(BACKEND_URL, {
           method: "POST",
           mode: "no-cors",
-          // no custom headers => no preflight
-          body: JSON.stringify(payload), // Apps Script: JSON.parse(e.postData.contents)
+          body: JSON.stringify(payload),
         });
       } catch (err) {
         console.error("Fetch error (ignored for CORS):", err);
       }
 
-      // UPI link generate
       const upiId = "saurabhx2004-3@oksbi";
       const payeeName = encodeURIComponent("UPL University");
       const note = encodeURIComponent("UPL Alumni Meet 2026");
-      const amount = encodeURIComponent(total.toString());
+      const amount = total.toFixed(2).replace(/\.00$/, "");
 
       const upiLink =
         `upi://pay?pa=${upiId}` +
@@ -367,14 +363,14 @@
         `&am=${amount}` +
         `&cu=INR`;
 
+      console.log("Persons:", persons, "Total:", total, "UPI link:", upiLink);
+
       statusEl.textContent =
         "Registration submitted! Opening UPI payment screen...";
       statusEl.className = "status success";
 
-      // Mobile pe UPI app open karega
       window.location.href = upiLink;
     });
   </script>
 </body>
 </html>
-
