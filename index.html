@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>UPL University Alumni Meet 2026 – Registration</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+    }
+    body {
+      margin: 0;
+      padding: 1rem;
+      background: #020617;
+      color: #e5e7eb;
+      display: flex;
+      justify-content: center;
+    }
+    .container {
+      max-width: 900px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 1.5rem;
+    }
+    @media (max-width: 768px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+    }
+    .card {
+      background: #020617;
+      border-radius: 1.25rem;
+      padding: 1.5rem;
+      border: 1px solid #1f2937;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+    .card-header {
+      margin-bottom: 1rem;
+    }
+    h1 {
+      font-size: 1.5rem;
+      margin: 0 0 0.4rem;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      background: rgba(34, 197, 94, 0.1);
+      color: #4ade80;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.6rem;
+    }
+    .subtitle {
+      font-size: 0.9rem;
+      color: #9ca3af;
+    }
+    .event-meta {
+      margin-top: 0.85rem;
+      padding: 0.85rem;
+      border-radius: 0.9rem;
+      background: #020617;
+      border: 1px solid #1f2937;
+      font-size: 0.85rem;
+    }
+    .event-meta div {
+      margin-bottom: 0.25rem;
+    }
+    .event-meta strong {
+      color: #e5e7eb;
+    }
+    .highlight {
+      color: #facc15;
+      font-weight: 500;
+    }
+    label {
+      display: block;
+      font-size: 0.8rem;
+      margin-bottom: 0.22rem;
+    }
+    input,
+    select {
+      width: 100%;
+      padding: 0.55rem 0.65rem;
+      border-radius: 0.5rem;
+      border: 1px solid #374151;
+      background: #020617;
+      color: #e5e7eb;
+      font-size: 0.9rem;
+      margin-bottom: 0.85rem;
+      outline: none;
+    }
+    input:focus,
+    select:focus {
+      border-color: #22c55e;
+      box-shadow: 0 0 0 1px #22c55e40;
+    }
+    .row {
+      display: flex;
+      gap: 0.75rem;
+    }
+    .row > div {
+      flex: 1;
+    }
+    .amount-box {
+      background: #022c22;
+      border-radius: 0.9rem;
+      padding: 0.85rem 1rem;
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+    }
+    .amount-box strong {
+      font-size: 1.1rem;
+    }
+    button {
+      width: 100%;
+      padding: 0.7rem;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(to right, #22c55e, #16a34a);
+      color: #022c22;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      margin-top: 0.25rem;
+    }
+    button:hover {
+      filter: brightness(1.05);
+    }
+    .status {
+      font-size: 0.8rem;
+      margin-top: 0.7rem;
+      color: #9ca3af;
+      min-height: 1.2em;
+    }
+    .status.success {
+      color: #4ade80;
+    }
+    .status.error {
+      color: #fb7185;
+    }
+    .note {
+      font-size: 0.75rem;
+      color: #6b7280;
+      margin-top: 0.6rem;
+    }
+    .small {
+      font-size: 0.8rem;
+      color: #9ca3af;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- LEFT: Event Info -->
+    <div class="card">
+      <div class="card-header">
+        <div class="badge">UPL University • Alumni Meet 2026</div>
+        <h1>Alumni Meet – 4 January 2026</h1>
+        <p class="subtitle">
+          UPL University is organizing an <strong>Alumni Meet</strong> on
+          <strong>Sunday, 4 January 2026</strong>, followed by
+          <span class="highlight">high tea and dinner</span> from
+          <strong>3:00 pm to 7:00 pm</strong>.
+        </p>
+        <p class="subtitle" style="margin-top:0.6rem;">
+          <em>Your presence truly matters to us.</em> Kindly register in advance to
+          help us plan arrangements smoothly.
+        </p>
+      </div>
+
+      <div class="event-meta">
+        <div><strong>Date:</strong> Sunday, 4 January 2026</div>
+        <div><strong>Time:</strong> 3:00 pm – 7:00 pm</div>
+        <div><strong>Venue:</strong> UPL University (Campus)</div>
+        <div><strong>Fee:</strong> ₹100 per person (includes entry & refreshments)</div>
+      </div>
+
+      <p class="small" style="margin-top:0.7rem;">
+        Please complete the registration and payment to confirm your seat.
+        You may register for yourself and accompanying family members/friends.
+      </p>
+    </div>
+
+    <!-- RIGHT: Registration + Payment -->
+    <div class="card">
+      <h2 style="font-size:1.1rem;margin-top:0;margin-bottom:1rem;">
+        Registration & Payment
+      </h2>
+
+      <form id="regForm">
+        <label for="name">Full Name *</label>
+        <input id="name" name="name" type="text" required />
+
+        <div class="row">
+          <div>
+            <label for="passout">Pass-out Year *</label>
+            <input
+              id="passout"
+              name="passout"
+              type="number"
+              min="2000"
+              max="2035"
+              required
+            />
+          </div>
+          <div>
+            <label for="branch">Branch *</label>
+            <input
+              id="branch"
+              name="branch"
+              type="text"
+              placeholder="e.g., Computer, Mechanical"
+              required
+            />
+          </div>
+        </div>
+
+        <!-- Discipline field -->
+        <label for="discipline">Discipline *</label>
+        <input
+          id="discipline"
+          name="discipline"
+          type="text"
+          placeholder="Diploma / B.Tech / B.Sc / BE / M.Tech"
+          required
+        />
+
+        <div class="row">
+          <div>
+            <label for="phone">Mobile Number *</label>
+            <input
+              id="phone"
+              name="phone"
+              type="tel"
+              pattern="[0-9]{10}"
+              maxlength="10"
+              required
+            />
+          </div>
+          <div>
+            <label for="email">Email *</label>
+            <input id="email" name="email" type="email" required />
+          </div>
+        </div>
+
+        <label for="persons">No. of Persons (including you) *</label>
+        <select id="persons" name="persons" required>
+          <option value="">Select</option>
+          <option value="1">1 (Only me)</option>
+          <option value="2">2 (Me + 1)</option>
+          <option value="3">3 (Me + 2)</option>
+          <option value="4">4 (Me + 3)</option>
+          <option value="5">5 (Me + 4)</option>
+        </select>
+
+        <div class="amount-box">
+          <span>Total (₹100 × persons)</span>
+          <strong>₹<span id="totalAmount">0</span></strong>
+        </div>
+
+        <button type="button" id="payBtn">
+          Submit & Pay via UPI / Paytm
+        </button>
+        <div id="status" class="status"></div>
+        <div class="note">
+          After submitting the form, you will be redirected to your UPI app
+          (Paytm / GPay / PhonePe) with the correct amount filled in.
+        </div>
+        <p class="small" style="margin-top:0.4rem;">
+          UPI ID for manual payment (if needed):
+          <strong>saurabhx2004-3@oksbi</strong>
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const PRICE_PER_PERSON = 100; // per person fee
+
+    const personsSelect = document.getElementById("persons");
+    const totalAmountSpan = document.getElementById("totalAmount");
+    const payBtn = document.getElementById("payBtn");
+    const regForm = document.getElementById("regForm");
+    const statusEl = document.getElementById("status");
+
+    function updateAmount() {
+      const persons = parseInt(personsSelect.value || "0", 10);
+      const total = persons * PRICE_PER_PERSON;
+      totalAmountSpan.textContent = total;
+    }
+
+    personsSelect.addEventListener("change", updateAmount);
+
+    payBtn.addEventListener("click", function () {
+      if (!regForm.checkValidity()) {
+        regForm.reportValidity();
+        return;
+      }
+
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const passout = document.getElementById("passout").value.trim();
+      const branch = document.getElementById("branch").value.trim();
+      const discipline = document.getElementById("discipline").value.trim();
+      const persons = parseInt(personsSelect.value, 10);
+      const total = persons * PRICE_PER_PERSON;
+
+      if (!persons || total <= 0) {
+        statusEl.textContent = "Please select number of persons.";
+        statusEl.className = "status error";
+        return;
+      }
+
+      statusEl.textContent = "Submitting your registration...";
+      statusEl.className = "status";
+
+      // 🔗 Apps Script backend URL
+      const BACKEND_URL =
+        "https://script.google.com/macros/s/AKfycbwqqz5m0thNuPXHBUMzflJ8iZJiOndNieluTOeBpmudQiFnNyuezkmQDAU2I9HZvZ9qRg/exec";
+
+      const payload = {
+        name,
+        email,
+        phone,
+        passout,
+        branch,
+        discipline,
+        persons,
+        total,
+        event: "UPL Alumni Meet 2026",
+      };
+
+      // 🔒 Fire-and-forget POST (no-cors) to avoid CORS errors
+      try {
+        fetch(BACKEND_URL, {
+          method: "POST",
+          mode: "no-cors",
+          // no custom headers => no preflight
+          body: JSON.stringify(payload), // Apps Script: JSON.parse(e.postData.contents)
+        });
+      } catch (err) {
+        console.error("Fetch error (ignored for CORS):", err);
+      }
+
+      // UPI link generate
+      const upiId = "saurabhx2004-3@oksbi";
+      const payeeName = encodeURIComponent("UPL University");
+      const note = encodeURIComponent("UPL Alumni Meet 2026");
+      const amount = encodeURIComponent(total.toString());
+
+      const upiLink =
+        `upi://pay?pa=${upiId}` +
+        `&pn=${payeeName}` +
+        `&tn=${note}` +
+        `&am=${amount}` +
+        `&cu=INR`;
+
+      statusEl.textContent =
+        "Registration submitted! Opening UPI payment screen...";
+      statusEl.className = "status success";
+
+      // Mobile pe UPI app open karega
+      window.location.href = upiLink;
+    });
+  </script>
+</body>
+</html>
+
