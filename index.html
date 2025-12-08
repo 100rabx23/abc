@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <title>UPL University Alumni Meet 2026 – Registration</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
   <style>
     * {
       box-sizing: border-box;
@@ -137,18 +136,6 @@
     button:hover {
       filter: brightness(1.05);
     }
-    .status {
-      font-size: 0.8rem;
-      margin-top: 0.7rem;
-      color: #9ca3af;
-      min-height: 1.2em;
-    }
-    .status.success {
-      color: #4ade80;
-    }
-    .status.error {
-      color: #fb7185;
-    }
     .note {
       font-size: 0.75rem;
       color: #6b7280;
@@ -198,7 +185,11 @@
         Registration & Payment
       </h2>
 
-      <form id="regForm">
+      <!-- 🔥 Direct POST to Apps Script -->
+      <form
+        id="regForm"
+        method="POST"
+        action="hhttps://script.google.com/macros/s/AKfycbxDed37cqOYP93R6yl_t5c5fv5uzUPJ3PuMJqCI52o5B8Hgwg5DMy3pr0a8vh98jbzKjA/exec>
         <label for="name">Full Name *</label>
         <input id="name" name="name" type="text" required />
 
@@ -268,17 +259,18 @@
           <strong>₹<span id="totalAmount">0</span></strong>
         </div>
 
-        <button type="button" id="payBtn">
-          Submit & Pay via UPI / Paytm
+        <!-- Hidden field: total amount backend ko jayega -->
+        <input type="hidden" id="amount" name="amount" value="0" />
+
+        <button type="submit">
+          Submit & View Payment Instructions
         </button>
-        <div id="status" class="status"></div>
         <div class="note">
-          After submitting the form, you will be redirected to your UPI app
-          (Paytm / GPay / PhonePe) with the correct amount filled in.
+          After submitting, you’ll see your exact amount and UPI payment link on the
+          next page. A confirmation email will also be sent.
         </div>
         <p class="small" style="margin-top:0.4rem;">
-          UPI ID for manual payment (if needed):
-          <strong>saurabhx2004-3@oksbi</strong>
+          Official UPI ID: <strong>UPI_ID_HERE</strong>
         </p>
       </form>
     </div>
@@ -286,91 +278,19 @@
 
   <script>
     const PRICE_PER_PERSON = 100;
-
     const personsSelect = document.getElementById("persons");
     const totalAmountSpan = document.getElementById("totalAmount");
-    const payBtn = document.getElementById("payBtn");
-    const regForm = document.getElementById("regForm");
-    const statusEl = document.getElementById("status");
+    const amountInput = document.getElementById("amount");
 
     function updateAmount() {
       const persons = Number(personsSelect.value || "0");
       const total = persons * PRICE_PER_PERSON;
-      totalAmountSpan.textContent = Number.isFinite(total) ? total : 0;
+      const safeTotal = Number.isFinite(total) ? total : 0;
+      totalAmountSpan.textContent = safeTotal;
+      amountInput.value = safeTotal;
     }
 
     personsSelect.addEventListener("change", updateAmount);
-
-    payBtn.addEventListener("click", function () {
-      if (!regForm.checkValidity()) {
-        regForm.reportValidity();
-        return;
-      }
-
-      const name = document.getElementById("name").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const phone = document.getElementById("phone").value.trim();
-      const passout = document.getElementById("passout").value.trim();
-      const branch = document.getElementById("branch").value.trim();
-      const discipline = document.getElementById("discipline").value.trim();
-
-      const persons = Number(personsSelect.value);
-      if (!Number.isFinite(persons) || persons <= 0) {
-        statusEl.textContent = "Please select number of persons.";
-        statusEl.className = "status error";
-        return;
-      }
-
-      const total = persons * 1;
-
-      statusEl.textContent = "Submitting your registration...";
-      statusEl.className = "status";
-
-      const BACKEND_URL =
-        "https://script.google.com/macros/s/AKfycbwqqz5m0thNuPXHBUMzflJ8iZJiOndNieluTOeBpmudQiFnNyuezkmQDAU2I9HZvZ9qRg/exec";
-
-      const payload = {
-        name,
-        email,
-        phone,
-        passout,
-        branch,
-        discipline,
-        persons,
-        total,
-        event: "UPL Alumni Meet 2026",
-      };
-
-      try {
-        fetch(BACKEND_URL, {
-          method: "POST",
-          mode: "no-cors",
-          body: JSON.stringify(payload),
-        });
-      } catch (err) {
-        console.error("Fetch error (ignored for CORS):", err);
-      }
-
-      const upiId = "saurabhx2004-3@oksbi";
-      const payeeName = encodeURIComponent("UPL University");
-      const note = encodeURIComponent("UPL Alumni Meet 2026");
-      const amount = total.toFixed(2).replace(/\.00$/, "");
-
-      const upiLink =
-        `upi://pay?pa=${upiId}` +
-        `&pn=${payeeName}` +
-        `&tn=${note}` +
-        `&am=${amount}` +
-        `&cu=INR`;
-
-      console.log("Persons:", persons, "Total:", total, "UPI link:", upiLink);
-
-      statusEl.textContent =
-        "Registration submitted! Opening UPI payment screen...";
-      statusEl.className = "status success";
-
-      window.location.href = upiLink;
-    });
   </script>
 </body>
 </html>
